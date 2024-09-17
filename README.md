@@ -14,7 +14,6 @@ yarn
 cd ..
 cd server
 yarn
-
 ```
 
 After doing this you must assign the following environment variables
@@ -33,5 +32,15 @@ JWT_ACCESS_EXPIRE=1d
 
 JWT_REFRESH_TOKEN=87654321
 JWT_REFRESH_EXPIRE=1d
-
 ```
+
+After doing run client and server
+
+```shell
+cd client
+yarn dev
+cd ..
+cd server
+yarn dev
+```
+Then go to http://localhost:5173/chat
