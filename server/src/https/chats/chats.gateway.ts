@@ -31,8 +31,7 @@ export class ChatsGateway {
   private logger = new Logger('ChatGateway');
 
   @SubscribeMessage('chat')
-  handleEvent(client: Socket, data: ChatDto, @CurrentUser() user) {
-    console.log('🚀 ~ ChatsGateway ~ handleEvent ~ user:', user);
+  handleEvent(client: Socket, data: ChatDto) {
     this.server.emit('chat', data);
     return data;
   }

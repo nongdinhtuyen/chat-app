@@ -7,7 +7,7 @@ import {
   IsString,
   Min,
 } from 'class-validator';
-import { RolesEnum } from 'src/main/roles/roles.enum';
+import { RolesEnum } from 'src/https/roles/roles.enum';
 
 export class RequestListPermissionDto {
   @IsOptional()

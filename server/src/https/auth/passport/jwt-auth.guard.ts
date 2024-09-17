@@ -9,9 +9,9 @@ import { Reflector } from '@nestjs/core';
 import { AuthGuard } from '@nestjs/passport';
 import { ExtractJwt } from 'passport-jwt';
 import { IS_PUBLIC_KEY } from 'src/decorator';
-import { PermissionsService } from 'src/main/permissions/permissions.service';
-import { RolesEnum } from 'src/main/roles/roles.enum';
-import { RolesService } from 'src/main/roles/roles.service';
+import { PermissionsService } from 'src/https/permissions/permissions.service';
+import { RolesEnum } from 'src/https/roles/roles.enum';
+import { RolesService } from 'src/https/roles/roles.service';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {

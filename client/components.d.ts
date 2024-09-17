@@ -7,20 +7,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AButton: typeof import('ant-design-vue/es')['Button']
-    ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
-    ACol: typeof import('ant-design-vue/es')['Col']
-    ADatePicker: typeof import('ant-design-vue/es')['DatePicker']
-    ADrawer: typeof import('ant-design-vue/es')['Drawer']
-    AForm: typeof import('ant-design-vue/es')['Form']
-    AFormItem: typeof import('ant-design-vue/es')['FormItem']
-    AInput: typeof import('ant-design-vue/es')['Input']
-    AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
-    ARow: typeof import('ant-design-vue/es')['Row']
-    ASelect: typeof import('ant-design-vue/es')['Select']
-    ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
-    ASpace: typeof import('ant-design-vue/es')['Space']
-    ATextarea: typeof import('ant-design-vue/es')['Textarea']
     CreateUser: typeof import('./src/components/CreateUser.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']

@@ -7,7 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 import mongoose from 'mongoose';
-import { User } from 'src/main/users/schemas/user.schema';
+import { User } from 'src/https/users/schemas/user.schema';
 
 export class CreateChannelDto {
   @IsString()

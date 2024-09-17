@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { RolesEnum } from 'src/main/roles/roles.enum';
+import { RolesEnum } from 'src/https/roles/roles.enum';
 
 export type ChatDocument = HydratedDocument<Chat>;
 

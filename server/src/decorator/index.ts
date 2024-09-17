@@ -3,7 +3,7 @@ import {
   ExecutionContext,
   SetMetadata,
 } from '@nestjs/common';
-import { RolesEnum } from 'src/main/roles/roles.enum';
+import { RolesEnum } from 'src/https/roles/roles.enum';
 
 export const RESPONSE_MESSAGE = 'responseMessage';
 export const ResponseMessage = (message: string) =>

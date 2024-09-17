@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { Chat } from 'src/main/chats/schemas/chat.schema';
-import { User } from 'src/main/users/schemas/user.schema';
+import { Chat } from 'src/https/chats/schemas/chat.schema';
+import { User } from 'src/https/users/schemas/user.schema';
 
 export type ChannelDocument = HydratedDocument<Channel>;
 

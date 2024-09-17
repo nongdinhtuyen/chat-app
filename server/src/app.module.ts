@@ -1,25 +1,25 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './main/auth/auth.module';
-import { UsersModule } from './main/users/users.module';
+import { AuthModule } from './https/auth/auth.module';
+import { UsersModule } from './https/users/users.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TasksModule } from './main/tasks/tasks.module';
+import { TasksModule } from './https/tasks/tasks.module';
 import type { Connection } from 'mongoose';
-import { RolesModule } from './main/roles/roles.module';
+import { RolesModule } from './https/roles/roles.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
-import { PermissionsModule } from './main/permissions/permissions.module';
-import { JwtAuthGuard } from './main/auth/passport/jwt-auth.guard';
-import { JwtStrategy } from './main/auth/passport/jwt.strategy';
-import { HealthModule } from './main/health/health.module';
-import { CustomersModule } from './main/customers/customers.module';
-import { ChatsModule } from './main/chats/chats.module';
+import { PermissionsModule } from './https/permissions/permissions.module';
+import { JwtAuthGuard } from './https/auth/passport/jwt-auth.guard';
+import { JwtStrategy } from './https/auth/passport/jwt.strategy';
+import { HealthModule } from './https/health/health.module';
+import { CustomersModule } from './https/customers/customers.module';
+import { ChatsModule } from './https/chats/chats.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { ChatsGateway } from './main/chats/chats.gateway';
-import { ChannelModule } from './main/channel/channel.module';
+import { ChatsGateway } from './https/chats/chats.gateway';
+import { ChannelModule } from './https/channel/channel.module';
 
 @Module({
   imports: [

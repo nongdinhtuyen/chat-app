@@ -92,7 +92,7 @@ code {
   display: flex;
   flex-direction: column;
   height: 90vh;
-  width: 60%;
+  width: 100%;
   border-left: 1px solid #d1dbe3;
   border-right: 1px solid #d1dbe3;
 }
