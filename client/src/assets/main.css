@@ -1,12 +1,12 @@
-@import './base.css';
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './index.css';
 
 #app {
   margin: 0 auto;
   padding: 2rem;
+  height: 100vh;
   font-weight: normal;
+  display: flex;
+  flex-direction: column;
 }
 
 a,

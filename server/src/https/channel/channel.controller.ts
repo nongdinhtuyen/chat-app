@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ChannelService } from './channel.service';
 import { CreateChannelDto } from './dto/create-channel.dto';
@@ -13,6 +14,7 @@ import { UpdateChannelDto } from './dto/update-channel.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { CurrentUser } from 'src/decorator';
 import { IUser } from '../users/users.interface';
+import { GetListChannelDto } from './dto/get-list-channel.dto';
 
 @Controller('channels')
 @ApiTags('channels')
@@ -28,13 +30,14 @@ export class ChannelController {
   }
 
   @Get()
-  findAll() {
-    // return this.channelService.findAll();
+  findAll(@Query() qs: GetListChannelDto) {
+    console.log('🚀 ~ ChannelController ~ findAll ~ qs:', qs);
+    return this.channelService.findAll(qs);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.channelService.findOne(+id);
+    return this.channelService.findOne(id);
   }
 
   @Patch(':id')

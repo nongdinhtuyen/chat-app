@@ -6,7 +6,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
-import { RolesEnum } from 'src/main/roles/roles.enum';
+import { RolesEnum } from 'src/https/roles/roles.enum';
 
 export class RequestListUserDto {
   page: number;

@@ -122,11 +122,11 @@ onRenderTriggered((event) => {
 input[type='checkbox']:checked + label span:first-of-type {
   background-color: #10b981;
   border-color: #10b981;
-  color: #fff;
+  /* color: #fff; */
 }
 
 input[type='checkbox']:checked + label span:nth-of-type(2) {
   text-decoration: line-through;
-  color: #9ca3af;
+  /* color: #9ca3af; */
 }
 </style>

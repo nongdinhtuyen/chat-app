@@ -69,7 +69,7 @@ type Message = {
 }
 
 const store = useAuthStore()
-const { user } = storeToRefs(store)
+const { profile } = storeToRefs(store)
 const socket = ref<Socket | null>(null)
 const connectionStatus = ref('disconnected')
 const messages = ref<Message[]>([])
@@ -77,7 +77,7 @@ const newMessage = ref('')
 const chatContainer = ref<HTMLElement | null>(null)
 
 watchEffect(() => {
-  console.log('🚀 ~ watchEffect ~ messages:', toRaw(user.value))
+  console.log('🚀 ~ watchEffect ~ messages:', toRaw(profile.value))
 })
 
 const connectSocket = () => {
@@ -97,7 +97,7 @@ const connectSocket = () => {
   })
 
   socket.value.on('chat', (data: any) => {
-    if (user.value._id !== data.idUser) {
+    if (profile.value._id !== data.idUser) {
       messages.value.push({
         date: Date.now(),
         text: data.text,
@@ -118,8 +118,8 @@ const connectSocket = () => {
 const sendMessage = () => {
   if (newMessage.value.trim() && socket.value) {
     const mess = {
-      idUser: user.value._id,
-      username: user.value.name,
+      idUser: profile.value._id,
+      username: profile.value.name,
       date: Date.now(),
       text: newMessage.value.trim(),
     }

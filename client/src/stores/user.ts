@@ -5,8 +5,17 @@ import { userEndpoints } from '@/requests/url_apis'
 import { defineStore } from 'pinia'
 import { ref, type Ref } from 'vue'
 
+export type UserType = {
+  _id: string
+  username: string
+  refreshToken: string
+  image: string
+  createdAt: Date
+  updatedAt: Date
+}
+
 export const useUserStore = defineStore('users', () => {
-  const users = ref<{ _id: string; name: string }[]>([])
+  const users = ref<UserType[]>([])
   const [loading, setLoading] = useBoolean()
 
   const getUsers = async () => {

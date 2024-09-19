@@ -41,6 +41,7 @@ export class AuthService {
       _id: user._id,
       name: user.username,
       role: user.role,
+      image: user.image,
     };
     return this.jwtService.sign(payload, {
       expiresIn: this.configService.get<string>('JWT_ACCESS_EXPIRE'),

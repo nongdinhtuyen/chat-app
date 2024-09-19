@@ -31,6 +31,11 @@ export type ListChannelType = {
   imageChannel: string
   lastMessage: ChatType
   isGroup: boolean
+  participants: {
+    _id: string
+    username: string
+    image: string
+  }[]
 }
 
 export const useChannelStore = defineStore('channels', () => {
@@ -53,6 +58,7 @@ export const useChannelStore = defineStore('channels', () => {
     setLoading.on()
     try {
       const response = await axiosRequest(baseRequest.get, channelEndpoints.getChannels)
+      console.log('🚀 ~ getOneChannels ~ response:', response)
       channels.value = await response.data.data
     } catch (error) {
       console.error('Failed to fetch channels:', error)

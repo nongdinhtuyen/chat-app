@@ -46,7 +46,7 @@ const createUser = () => {
             {{ user._id }}
           </th>
 
-          <td class="px-6 py-4">{{ user.name }}</td>
+          <td class="px-6 py-4">{{ user.username }}</td>
         </tr>
       </tbody>
     </table>

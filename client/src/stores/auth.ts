@@ -10,14 +10,14 @@ export type IUser = {
   _id: string
   name: string
   role: string
+  image: string
   exp: number
   iat: number
 }
 
-export const useAuthStore = defineStore('tasks', () => {
+export const useAuthStore = defineStore('profile', () => {
   const isAuth = ref(!!utils.getAccessToken())
-  const user = ref<IUser>(utils.parseJwt(utils.getAccessToken() || ''))
-  console.log('🚀 ~ useAuthStore ~ user:', user.value)
+  const profile = ref<IUser>(utils.parseJwt(utils.getAccessToken() || ''))
 
   const login = async (username: string, password: string) => {
     return axiosRequest(baseRequest.post, authEndpoints.login, {
@@ -26,7 +26,7 @@ export const useAuthStore = defineStore('tasks', () => {
     }).then((value) => {
       isAuth.value = true
       const { accessToken, refreshToken } = value.data.data
-      user.value = utils.parseJwt(accessToken)
+      profile.value = utils.parseJwt(accessToken)
       localStorage.setItem(consts.ACCESS_TOKEN, accessToken)
       localStorage.setItem(consts.REFRESH_TOKEN, refreshToken)
     })
@@ -40,7 +40,7 @@ export const useAuthStore = defineStore('tasks', () => {
   }
 
   return {
-    user,
+    profile,
     login,
     isAuth,
     create,

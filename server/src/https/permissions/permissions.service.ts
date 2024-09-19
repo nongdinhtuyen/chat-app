@@ -35,8 +35,13 @@ export class PermissionsService {
       },
     ];
     const result = await this.permissionModel.aggregate(pipeline).exec();
-    const explain = await this.permissionModel.aggregate(pipeline).explain('executionStats');
-    console.log("🚀 ~ PermissionsService ~ findAll ~ explain:", (explain.stages[0]))
+    const explain = await this.permissionModel
+      .aggregate(pipeline)
+      .explain('executionStats');
+    console.log(
+      '🚀 ~ PermissionsService ~ findAll ~ explain:',
+      explain.stages[0],
+    );
     const data = result[0].data || [];
 
     const totalCount = result[0].totalCount[0]?.count || 0;

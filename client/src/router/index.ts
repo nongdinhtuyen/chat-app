@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: convertRoutes(ROUTES.LOGIN),
       name: ROUTES.LOGIN,
-      component: () => import('../pages/LoginView.vue'),
+      component: () => import('../pages/LoginView/Login.vue'),
     },
     {
       path: convertRoutes(ROUTES.ABOUT),
@@ -30,7 +30,7 @@ const router = createRouter({
       props: {
         isCreateUser: true,
       },
-      component: () => import('../pages/LoginView.vue'),
+      component: () => import('../pages/LoginView/Login.vue'),
     },
     {
       path: convertRoutes(ROUTES.USER),
@@ -41,6 +41,11 @@ const router = createRouter({
       path: convertRoutes(ROUTES.CHAT),
       name: ROUTES.CHAT,
       component: () => import('../pages/ChatView.vue'),
+    },
+    {
+      path: convertRoutes(ROUTES.MESSENGER),
+      name: ROUTES.MESSENGER,
+      component: () => import('../pages/MessengerView/MessengerLayout.vue'),
     },
   ],
 })

@@ -28,6 +28,8 @@ function createEndpointProxy<T extends Endpoints>(
 const taskPrefix = 'tasks'
 const authPrefix = 'auth'
 const userPrefix = 'users'
+const channelPrefix = 'channels'
+const chatPrefix = 'chat'
 
 export const taskEndpoints = {
   getTasks: `tasks`,
@@ -44,5 +46,16 @@ export const authEndpoints = createEndpointProxy(authPrefix, {
 
 export const userEndpoints = createEndpointProxy(userPrefix, {
   getUsers: '',
+  getUserById: (id: string) => id,
   createUsers: '',
+})
+
+export const channelEndpoints = createEndpointProxy(channelPrefix, {
+  getOneChannel: (id: string) => `channels/${id}`,
+  getChannels: '',
+  createChannels: '',
+})
+
+export const chatEndpoints = createEndpointProxy(chatPrefix, {
+  getMessage: (id: string) => `message/${id}`,
 })

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
@@ -11,10 +10,12 @@ import HelloWorld from './components/HelloWorld.vue'
       <RouterLink to="/login">Login</RouterLink>
       <RouterLink to="/user">User</RouterLink>
       <RouterLink to="/chat">Chat</RouterLink>
+      <RouterLink to="/messenger">Messenger</RouterLink>
     </nav>
   </header>
 
   <RouterView />
+  <!-- <MessengerLayout /> -->
 </template>
 
 <style scoped>
@@ -25,7 +26,6 @@ header {
 
 .logo {
   display: block;
-  margin: 0 auto 2rem;
 }
 
 nav {
@@ -71,11 +71,8 @@ nav a:first-of-type {
 
   nav {
     text-align: left;
-    margin-left: -1rem;
     font-size: 1rem;
-
     padding: 1rem 0;
-    margin-top: 1rem;
   }
 }
 </style>
