@@ -4,7 +4,11 @@ import { IsNotEmpty, IsString } from 'class-validator';
 export class ChatDto {
   @IsString()
   @IsNotEmpty()
-  idUser: string;
+  userId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  chatId: string;
 
   @Type(() => Number)
   @IsNotEmpty()

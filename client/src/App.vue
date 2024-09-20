@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import { ConfigProvider, theme } from 'ant-design-vue'
+import { computed } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+const themeAlgorithm = computed(() => {
+  return prefersDark ? theme.darkAlgorithm : theme.defaultAlgorithm
+})
 </script>
 
 <template>
@@ -14,7 +21,17 @@ import { RouterLink, RouterView } from 'vue-router'
     </nav>
   </header>
 
-  <RouterView />
+  <ConfigProvider
+    :theme="{
+      hashed: false,
+      algorithm: themeAlgorithm,
+      token: {
+        fontFamily: 'IBM Plex Sans, sans-serif',
+      },
+    }"
+  >
+    <RouterView />
+  </ConfigProvider>
   <!-- <MessengerLayout /> -->
 </template>
 

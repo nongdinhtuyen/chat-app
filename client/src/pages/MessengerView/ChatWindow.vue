@@ -169,6 +169,7 @@ const sendMessage = () => {
       userName: profile.value.name,
       text: newMessage.value.trim(),
       createdAt: new Date().toISOString(),
+      chatId: selectedChat.value._id,
     }
     socket.value.emit(consts.CHAT_GATEWAY, mess)
     messages.value.result.push(mess)

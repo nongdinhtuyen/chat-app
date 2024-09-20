@@ -12,8 +12,10 @@ export class SignUpDto {
   @IsNotEmpty()
   password: string;
 
-  @IsNotEmpty()
   @IsEnum(RolesEnum)
   @IsOptional()
   role?: RolesEnum;
+
+  @IsOptional()
+  image?: string;
 }

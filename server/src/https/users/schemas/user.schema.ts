@@ -12,6 +12,9 @@ export class User {
   @Prop()
   password: string;
 
+  @Prop()
+  avatar: string;
+
   @Prop({
     type: String,
     enum: RolesEnum,

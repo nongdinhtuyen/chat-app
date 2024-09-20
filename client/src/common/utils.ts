@@ -24,9 +24,14 @@ function parseJwt(token: string) {
   }
 }
 
+function ellipsisString(str: string, maxLength: number = 20): string {
+  return str.length > maxLength ? str.slice(0, maxLength) + '...' : str
+}
+
 export default {
   setAccessToken,
   setRefreshToken,
   parseJwt,
   getAccessToken,
+  ellipsisString,
 }

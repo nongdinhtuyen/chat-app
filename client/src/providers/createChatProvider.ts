@@ -29,7 +29,7 @@ const [useChatProvide, useInjectStore] = createInjectionState((initialValue?: Se
     const otherPart = chat.participants?.find((participant) => participant._id !== user._id)
     return {
       name: otherPart?.username,
-      image: otherPart?.image,
+      image: otherPart?.avatar,
     }
   })
 

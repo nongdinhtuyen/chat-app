@@ -79,8 +79,9 @@ export class AuthService {
     const newUser = await this.usersService.create({
       ...createUserDto,
       password: hashPassword,
+      avatar: `https://avatars.githubusercontent.com/u/${Math.floor(Math.random() * 100000) + 1}`,
     });
-    return;
+    return newUser;
   }
 
   async logout(user: IUser) {

@@ -9,7 +9,7 @@ import { RequestListChatDto } from './dto/request-list-message.dto';
 export class ChatService {
   constructor(@InjectModel(Chat.name) private chatModel: Model<ChatDocument>) {}
 
-  async createMessage(createMessageDto: ChatDto) {
+  async addMessage(createMessageDto: ChatDto) {
     console.log(
       '🚀 ~ ChatService ~ createMessage ~ createMessageDto:',
       createMessageDto,

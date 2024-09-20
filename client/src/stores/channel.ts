@@ -34,7 +34,7 @@ export type ListChannelType = {
   participants: {
     _id: string
     username: string
-    image: string
+    avatar: string
   }[]
 }
 
@@ -58,7 +58,6 @@ export const useChannelStore = defineStore('channels', () => {
     setLoading.on()
     try {
       const response = await axiosRequest(baseRequest.get, channelEndpoints.getChannels)
-      console.log('🚀 ~ getOneChannels ~ response:', response)
       channels.value = await response.data.data
     } catch (error) {
       console.error('Failed to fetch channels:', error)
@@ -67,12 +66,9 @@ export const useChannelStore = defineStore('channels', () => {
     }
   }
 
-  const createChannel = async ({ name, password }: { name: string; password: string }) => {
+  const createChannel = async (body) => {
     setLoading.on()
-    await axiosRequest(baseRequest.post, channelEndpoints.createChannels, {
-      name,
-      password,
-    })
+    await axiosRequest(baseRequest.post, channelEndpoints.createChannel, body)
     await getChannels()
     setLoading.off()
   }

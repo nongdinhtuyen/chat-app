@@ -54,7 +54,7 @@ export class ChannelService {
               $project: {
                 _id: 1, // Chỉ lấy trường _id
                 username: 1, // Lấy trường name
-                image: 1, // Lấy trường image
+                avatar: 1, // Lấy trường avatar
               },
             },
           ],

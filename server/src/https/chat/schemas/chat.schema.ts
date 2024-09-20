@@ -14,6 +14,9 @@ export class Chat {
   userId: mongoose.Schema.Types.ObjectId;
 
   @Prop()
+  chatId: mongoose.Schema.Types.ObjectId;
+
+  @Prop()
   text: string;
 
   @Prop()

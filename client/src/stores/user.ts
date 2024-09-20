@@ -8,10 +8,10 @@ import { ref, type Ref } from 'vue'
 export type UserType = {
   _id: string
   username: string
-  refreshToken: string
-  image: string
-  createdAt: Date
-  updatedAt: Date
+  refreshToken?: string
+  avatar: string
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export const useUserStore = defineStore('users', () => {

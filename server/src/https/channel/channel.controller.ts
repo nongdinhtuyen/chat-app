@@ -31,7 +31,6 @@ export class ChannelController {
 
   @Get()
   findAll(@Query() qs: GetListChannelDto) {
-    console.log('🚀 ~ ChannelController ~ findAll ~ qs:', qs);
     return this.channelService.findAll(qs);
   }
 

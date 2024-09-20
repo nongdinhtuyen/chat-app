@@ -41,7 +41,7 @@ export const taskEndpoints = {
 
 export const authEndpoints = createEndpointProxy(authPrefix, {
   login: `login`,
-  create: `create`,
+  create: `sign-up`,
 })
 
 export const userEndpoints = createEndpointProxy(userPrefix, {
@@ -53,7 +53,7 @@ export const userEndpoints = createEndpointProxy(userPrefix, {
 export const channelEndpoints = createEndpointProxy(channelPrefix, {
   getOneChannel: (id: string) => `channels/${id}`,
   getChannels: '',
-  createChannels: '',
+  createChannel: '',
 })
 
 export const chatEndpoints = createEndpointProxy(chatPrefix, {

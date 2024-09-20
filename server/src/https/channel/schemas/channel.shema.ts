@@ -22,8 +22,8 @@ export class Channel {
   @Prop()
   nameGroup: string;
 
-  @Prop()
-  image: string;
+  // @Prop()
+  // image: string;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Chat.name })
   lastMessage: Chat;

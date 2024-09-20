@@ -42,7 +42,7 @@ export class ChatsGateway {
   async handleEvent(client: Socket, data: ChatDto) {
     try {
       this.server.emit(consts.CHAT_GATEWAY, data);
-      await this.chatService.createMessage(data);
+      await this.chatService.addMessage(data);
       return data;
     } catch (err) {
       throw new BadGatewayException('Something went wrong');
@@ -68,7 +68,6 @@ export class ChatsGateway {
         client.emit('error', {
           message: 'Unauthorized',
         });
-        // send error message to client
         client.disconnect();
       }
     } else {

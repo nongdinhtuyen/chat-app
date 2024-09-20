@@ -21,6 +21,7 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CurrentUser, Public, ResponseMessage, Roles } from 'src/decorator';
 import { LocalAuthGuard } from './passport/local-auth.guard';
 import { SignInDto } from './dto/sign-in.dto';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -50,7 +51,7 @@ export class AuthController {
     status: HttpStatus.CREATED,
   })
   @ResponseMessage('Success')
-  createUser(@Body() createAuthDto: SignUpDto) {
+  createUser(@Body() createAuthDto: CreateUserDto) {
     return this.authService.signUp(createAuthDto);
   }
 
