@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsString } from 'class-validator';
+import mongoose from 'mongoose';
 
 export class ChatDto {
   @IsString()
@@ -8,7 +9,7 @@ export class ChatDto {
 
   @IsString()
   @IsNotEmpty()
-  chatId: string;
+  chatId: mongoose.Schema.Types.ObjectId;
 
   @Type(() => Number)
   @IsNotEmpty()

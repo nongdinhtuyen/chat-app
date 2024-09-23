@@ -7,6 +7,7 @@ import {
   IsString,
   Min,
 } from 'class-validator';
+import mongoose from 'mongoose';
 
 export class RequestListChatDto {
   @IsOptional()

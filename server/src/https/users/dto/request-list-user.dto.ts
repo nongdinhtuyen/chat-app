@@ -1,3 +1,4 @@
+import { Transform, Type } from 'class-transformer';
 import {
   IsBooleanString,
   IsEnum,
@@ -9,9 +10,13 @@ import {
 import { RolesEnum } from 'src/https/roles/roles.enum';
 
 export class RequestListUserDto {
-  page: number;
+  @IsOptional()
+  @Type(() => Number)
+  current?: number = 1;
 
-  limit: number;
+  @IsOptional()
+  @Type(() => Number)
+  limit?: number = 10;
 
   @IsString()
   @IsOptional()
@@ -22,4 +27,8 @@ export class RequestListUserDto {
     message: 'role must be one of the following values: user, admin',
   })
   role: string;
+
+  @IsOptional()
+  @Transform(({ value }) => Boolean(value))
+  notIncludeMySelf?: boolean;
 }

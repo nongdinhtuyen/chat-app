@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument } from 'mongoose';
-import { RolesEnum } from 'src/https/roles/roles.enum';
-import { User } from 'src/https/users/schemas/user.schema';
+import { Channel } from 'src/https/channel/schemas/channel.shema';
 
 export type ChatDocument = HydratedDocument<Chat>;
 
@@ -13,8 +12,8 @@ export class Chat {
   @Prop()
   userId: mongoose.Schema.Types.ObjectId;
 
-  @Prop()
-  chatId: mongoose.Schema.Types.ObjectId;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Channel.name })
+  channelId: Channel[];
 
   @Prop()
   text: string;

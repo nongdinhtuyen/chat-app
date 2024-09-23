@@ -10,6 +10,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { isValidObjectId, Model } from 'mongoose';
 import utils from 'src/common/utils';
+import { RequestListUserDto } from './dto/request-list-user.dto';
+import { IUser } from './users.interface';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
@@ -18,10 +20,19 @@ export class UsersService {
     return await this.userModel.create(createUserDto);
   }
 
-  async findAll() {
+  async findAll(qs: RequestListUserDto, currentUser: IUser) {
+    const { current = 1, limit = 10, notIncludeMySelf } = qs;
+    const filter: any = {};
+
+    // Nếu includeMySelf là false, thêm điều kiện để loại bỏ currentUser
+    if (notIncludeMySelf) {
+      filter._id = { $ne: currentUser._id };
+    }
     const allUser = await this.userModel
-      .find()
+      .find(filter)
       .select(['-password', '-refreshToken'])
+      .skip((current - 1) * limit) // Phân trang
+      .limit(limit) // Giới hạn số lượng kết quả
       .lean();
     return allUser;
   }

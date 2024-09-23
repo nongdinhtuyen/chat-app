@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ChatDto } from './dto/chat.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Chat, ChatDocument } from './schemas/chat.schema';
-import { Model } from 'mongoose';
+import mongoose, { Model, PipelineStage, Types } from 'mongoose';
 import { RequestListChatDto } from './dto/request-list-message.dto';
 
 @Injectable()
@@ -10,37 +10,37 @@ export class ChatService {
   constructor(@InjectModel(Chat.name) private chatModel: Model<ChatDocument>) {}
 
   async addMessage(createMessageDto: ChatDto) {
-    console.log(
-      '🚀 ~ ChatService ~ createMessage ~ createMessageDto:',
-      createMessageDto,
-    );
     try {
       const newMessage = await this.chatModel.create(createMessageDto);
       return newMessage;
     } catch (err) {
-      console.log('🚀 ~ ChatService ~ createMessage ~ err:', err);
       throw err;
     }
   }
 
-  async findAll(qs: RequestListChatDto) {
-    const { current = 1, limit = 20 } = qs;
-    const skip = (current - 1) * limit;
+  async findAll(qs: RequestListChatDto, channelId: string) {
+    const { current = 1, limit = 400 } = qs;
+    const pipeline: PipelineStage[] = [
+      {
+        $match: {
+          $and: [
+            { channelId: new Types.ObjectId(channelId) }, // Kiểm tra user có trong admins
+          ],
+        },
+      },
+      {
+        $facet: {
+          data: [{ $skip: limit * (current - 1) }, { $limit: limit }],
+          totalCount: [{ $count: 'count' }],
+        },
+      },
+    ];
+    const result = await this.chatModel.aggregate(pipeline);
+    const data = result[0].data || [];
 
-    // Đếm tổng số bản ghi
-    const totalCount = await this.chatModel.countDocuments();
+    const totalCount = result[0].totalCount[0]?.count || 0;
 
-    // Tính tổng số trang
     const totalPages = Math.ceil(totalCount / limit);
-
-    // Lấy các bản ghi cho trang hiện tại
-    const chats = await this.chatModel
-      .find()
-      // .sort({ createdAt: -1 }) // Sắp xếp theo thứ tự giảm dần của createdAt
-      .skip(skip) // Bỏ qua các bản ghi đã nằm ở các trang trước
-      .limit(limit) // Lấy số lượng bản ghi theo limit
-      .exec();
-
     // Trả về dữ liệu
     return {
       meta: {
@@ -49,7 +49,7 @@ export class ChatService {
         pages: totalPages,
         total: totalCount,
       },
-      result: chats, // Dữ liệu của trang hiện tại
+      result: data, // Dữ liệu của trang hiện tại
     };
   }
 

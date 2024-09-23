@@ -16,7 +16,7 @@ export class CreateChannelDto {
   @IsString()
   @IsOptional()
   @ApiProperty()
-  nameGroup: string;
+  nameChannel: string;
 
   @IsNotEmpty()
   @IsMongoId({ each: true })

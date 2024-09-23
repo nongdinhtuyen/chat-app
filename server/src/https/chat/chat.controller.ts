@@ -27,7 +27,7 @@ export class ChatController {
   constructor(private readonly chatService: ChatService) {}
 
   @Get('message/:id')
-  findAll(@Query() qs: RequestListChatDto) {
-    return this.chatService.findAll(qs);
+  findAll(@Query() qs: RequestListChatDto, @Param('id') id: string) {
+    return this.chatService.findAll(qs, id);
   }
 }

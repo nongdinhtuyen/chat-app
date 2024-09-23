@@ -13,20 +13,11 @@ export class Channel {
   @Prop({ type: [mongoose.Schema.Types.ObjectId], ref: User.name })
   members: User[];
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Chat.name })
-  chatId: Chat;
-
   @Prop()
   isGroup: boolean;
 
   @Prop()
-  nameGroup: string;
-
-  // @Prop()
-  // image: string;
-
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Chat.name })
-  lastMessage: Chat;
+  nameChannel: string;
 
   @Prop()
   createdAt: Date;

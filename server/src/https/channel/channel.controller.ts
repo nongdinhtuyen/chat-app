@@ -30,8 +30,8 @@ export class ChannelController {
   }
 
   @Get()
-  findAll(@Query() qs: GetListChannelDto) {
-    return this.channelService.findAll(qs);
+  findAll(@Query() qs: GetListChannelDto, @CurrentUser() user: IUser) {
+    return this.channelService.findAll(qs, user);
   }
 
   @Get(':id')

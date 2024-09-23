@@ -3,7 +3,7 @@ import { CreateChannelDto } from './dto/create-channel.dto';
 import { UpdateChannelDto } from './dto/update-channel.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Channel, ChannelDocument } from './schemas/channel.shema';
-import { Model, PipelineStage } from 'mongoose';
+import { Model, PipelineStage, Types } from 'mongoose';
 import { IUser } from '../users/users.interface';
 import { GetListChannelDto } from './dto/get-list-channel.dto';
 
@@ -18,29 +18,22 @@ export class ChannelService {
     return 'This action adds a new channel';
   }
 
-  async findAll(qs: GetListChannelDto) {
+  async findAll(qs: GetListChannelDto, user: IUser) {
     const { current, limit, name } = qs;
+    const userId = new Types.ObjectId(user._id);
     const search = {
       ...(name && { name: { $regex: name, $options: 'i' } }),
+      $or: [
+        { admins: userId }, // Kiểm tra user có trong admins
+        { members: userId }, // Kiểm tra user có trong members
+      ],
     };
     const pipeline: PipelineStage[] = [
       {
         $match: search,
       },
       {
-        // Lookup để lấy lastMessage từ collection Chat
-        $lookup: {
-          from: 'chats', // Tên collection Chat trong MongoDB
-          localField: 'lastMessage', // Trường lastMessage trong Channel
-          foreignField: '_id', // Liên kết với _id của Chat
-          as: 'lastMessage',
-        },
-      },
-      {
-        // Lấy tin nhắn cuối cùng, chỉ cần phần tử đầu tiên của mảng
-        $addFields: {
-          lastMessage: { $arrayElemAt: ['$lastMessage', 0] },
-        },
+        $sort: { createdAt: -1 },
       },
       {
         // Lookup để lấy thông tin admins khi isGroup = false
@@ -60,7 +53,6 @@ export class ChannelService {
           ],
         },
       },
-
       {
         $facet: {
           data: [
@@ -75,11 +67,11 @@ export class ChannelService {
                 isGroup: 1,
                 chatId: 1,
                 lastMessage: 1,
-                // Nếu isGroup là true, trả về nameGroup
-                nameGroup: {
+                // Nếu nameChannel là true, trả về nameChannel
+                nameChannel: {
                   $cond: {
                     if: { $eq: ['$isGroup', true] },
-                    then: '$nameGroup',
+                    then: '$nameChannel',
                     else: null,
                   },
                 },

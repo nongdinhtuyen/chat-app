@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -15,6 +16,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { Public, ResponseMessage, Roles, CurrentUser } from 'src/decorator';
 import { RolesEnum } from '../roles/roles.enum';
 import { User } from './schemas/user.schema';
+import { RequestListUserDto } from './dto/request-list-user.dto';
+import { IUser } from './users.interface';
 
 @ApiTags('users')
 @Controller('users')
@@ -29,8 +32,8 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  findAll(@Query() qs: RequestListUserDto, @CurrentUser() currentUser: IUser) {
+    return this.usersService.findAll(qs, currentUser);
   }
 
   @Get(':id')
