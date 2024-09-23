@@ -27,11 +27,19 @@
       >
         <div class="flex items-center space-x-3">
           <div class="relative">
-            <img
-              :src="renderNameChat(chat).image"
-              :alt="renderNameChat(chat).image"
-              class="w-12 h-12 rounded-full object-cover"
-            />
+            <template v-if="chat.isGroup">
+              <TeamOutlined
+                style="font-size: 34px"
+                class="w-12 h-12 justify-center m-auto rounded-full object-cover border border-white"
+              />
+            </template>
+            <template else>
+              <img
+                :src="renderNameChat(chat).image"
+                :alt="renderNameChat(chat).image"
+                class="w-12 h-12 rounded-full object-cover"
+              />
+            </template>
             <!-- <div
               v-if="chat.online"
               class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-white"
@@ -74,7 +82,7 @@ import { storeToRefs } from 'pinia'
 import { useChatContext } from '../../providers/createChatProvider'
 import { useToggle } from '@vueuse/core'
 import ModalChat from './ModalChat.vue'
-
+import { TeamOutlined } from '@ant-design/icons-vue'
 const channelStore = useChannelStore()
 const { channels } = storeToRefs(channelStore)
 const { selectedChat, handleSelectChat, renderNameChat } = useChatContext()

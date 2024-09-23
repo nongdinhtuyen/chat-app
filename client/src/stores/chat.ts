@@ -15,7 +15,6 @@ export const useChatStore = defineStore('chat', () => {
   const [loading, setLoading] = useBoolean()
 
   const getMessage = async (id: string) => {
-    console.log('🚀 ~ getMessage ~ id:', chatEndpoints.getMessage(id))
     setLoading.on()
     try {
       const response = await axiosRequest(baseRequest.get, chatEndpoints.getMessage(id), {
@@ -25,7 +24,6 @@ export const useChatStore = defineStore('chat', () => {
         },
       })
       messages.value = response.data.data
-      console.log('🚀 ~ getMessage ~ response.data.data:', response.data.data)
     } catch (error) {
       console.error('Failed to fetch chats:', error)
     } finally {

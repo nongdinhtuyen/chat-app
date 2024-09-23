@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import consts, { ROUTES } from '@/constants/consts'
 
-const publicRoutes = [ROUTES.HOME, ROUTES.LOGIN, ROUTES.CREATE, ROUTES.USER]
+const publicRoutes = [ROUTES.HOME, ROUTES.LOGIN]
 
 const convertRoutes = (route: string) => `/${route}`
 

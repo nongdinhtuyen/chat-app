@@ -25,9 +25,7 @@ const getData = () => {
   store.fetchTasks()
 }
 
-watchEffect(() => {
-  console.log('🚀 ~ watch ~ loading:', checkList.value, isEmpty(checkList.value))
-})
+watchEffect(() => {})
 
 onMounted(() => {
   // store.fetchTasks()

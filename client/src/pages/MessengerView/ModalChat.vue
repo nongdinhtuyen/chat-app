@@ -44,14 +44,17 @@ type SelectUserType = UserType & { selected?: boolean }
 const authStore = useAuthStore()
 const { profile } = storeToRefs(authStore)
 const selectedUsers = ref<SelectUserType[]>([])
-console.log('🚀 ~ selectedUsers:', selectedUsers)
 const channelStore = useChannelStore()
 const { channels } = storeToRefs(channelStore)
 const open = defineModel<boolean>()
 
 const fetchUsers = async () => {
   try {
-    const response = await axiosRequest(baseRequest.get, userEndpoints.getUsers)
+    const response = await axiosRequest(baseRequest.get, userEndpoints.getUsers, {
+      params: {
+        notIncludeMySelf: true,
+      },
+    })
     const { data } = await response.data
     selectedUsers.value = data
   } catch (error) {
@@ -64,17 +67,20 @@ onMounted(() => {
 })
 
 const handleCreateChannel = () => {
-  const isGroup = _.filter(selectedUsers.value, (u) => u.selected)
+  const groupSelectedUser = selectedUsers.value.filter((u) => u.selected)
+  const isGroup = groupSelectedUser.length > 1
   const newChannel = {}
-  if (isGroup.length > 2) {
+  if (isGroup) {
     Object.assign(newChannel, {
       admins: [profile.value._id],
-      members: _.map(selectedUsers.value, '_id'),
+      members: _.map(groupSelectedUser, '_id'),
       isGroup,
-      nameGroup: utils.ellipsisString(_.map(selectedUsers.value, 'username').join(',')),
+      nameChannel: utils.ellipsisString(
+        profile.value.name + ',' + _.map(groupSelectedUser, 'username').join(','),
+      ),
     })
   } else {
-    const findOther = _.find(selectedUsers.value, (user) => user._id !== profile.value._id)
+    const findOther = _.find(groupSelectedUser, (user) => user._id !== profile.value._id)
     Object.assign(newChannel, {
       admins: [profile.value._id, findOther?._id],
       members: [],
@@ -87,14 +93,6 @@ const handleCreateChannel = () => {
 const toggleSelection = (user: SelectUserType, index: number) => {
   selectedUsers.value[index].selected = !selectedUsers.value[index].selected
 }
-
-watch(
-  () => selectedUsers,
-  (newValue, oldValue) => {
-    console.log('🚀 ~ watch ~ selectedUsers:', toRaw(selectedUsers))
-  },
-  { deep: true },
-)
 </script>
 
 <style scoped>

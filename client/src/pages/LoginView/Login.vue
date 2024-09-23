@@ -5,13 +5,13 @@ import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { Button } from 'ant-design-vue'
+import { baseRequest } from '@/requests/baseRequest'
 
 const { isCreateUser } = defineProps<{
   isCreateUser?: any
 }>()
 
 const store = useAuthStore()
-const { isAuth } = storeToRefs(store)
 const loginName = ref('q')
 const loginPass = ref('q')
 const router = useRouter()
@@ -33,7 +33,7 @@ const onSubmit = (event: Event) => {
   <main>
     <div class="flex min-h-full flex-col justify-center p-6 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 class="text-center text-2xl font-bold leading-9 tracking-tight">
           Sign in to your account
         </h2>
       </div>

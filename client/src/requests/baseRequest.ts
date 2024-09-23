@@ -1,3 +1,4 @@
+import utils from '@/common/utils'
 import type { AxiosPromise, ParamsSerializerOptions } from 'axios'
 import axios from 'axios'
 import { parse, stringify } from 'qs'
@@ -8,7 +9,6 @@ export const baseRequest = axios.create({
   headers: {
     'Content-Type': 'application/json',
     openNotify: true,
-    Authorization: `Bearer ${import.meta.env.VITE_JWT}`,
   },
   paramsSerializer: {
     encode: (param: string): ParsedQs => parse(param),

@@ -1,24 +1,32 @@
 <script setup lang="ts">
 import { ConfigProvider, theme } from 'ant-design-vue'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import utils from './common/utils'
+import { baseRequest } from './requests/baseRequest'
 
 const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 const themeAlgorithm = computed(() => {
   return prefersDark ? theme.darkAlgorithm : theme.defaultAlgorithm
 })
+
+onMounted(() => {
+  if (utils.getAccessToken()) {
+    baseRequest.defaults.headers.common.Authorization = `Bearer ${utils.getAccessToken()}`
+  }
+})
 </script>
 
 <template>
   <header>
-    <nav>
+    <!-- <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/about">About</RouterLink>
       <RouterLink to="/login">Login</RouterLink>
       <RouterLink to="/user">User</RouterLink>
       <RouterLink to="/chat">Chat</RouterLink>
       <RouterLink to="/messenger">Messenger</RouterLink>
-    </nav>
+    </nav> -->
   </header>
 
   <ConfigProvider

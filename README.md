@@ -22,10 +22,10 @@ After doing this you must assign the following environment variables
 ```shell
 
 --- CLIENT ---
-VITE_BASE_URL=http://{{your Ip Address}}:8080/api/v1
+VITE_BASE_URL=http://localhost:8080/api/v1
 
 --- SERVER ---
-MONGODB_URI
+MONGODB_URI=
 PORT=8080
 
 JWT_ACCESS_TOKEN=12345678

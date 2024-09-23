@@ -26,6 +26,7 @@ export const useAuthStore = defineStore('profile', () => {
     }).then((value) => {
       isAuth.value = true
       const { accessToken, refreshToken } = value.data.data
+      baseRequest.defaults.headers.common.Authorization = `Bearer ${accessToken}`
       profile.value = utils.parseJwt(accessToken)
       localStorage.setItem(consts.ACCESS_TOKEN, accessToken)
       localStorage.setItem(consts.REFRESH_TOKEN, refreshToken)

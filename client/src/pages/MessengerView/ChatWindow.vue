@@ -24,7 +24,11 @@
       </div>
     </div>
     <ScrollArea class="p-4 scroll-area">
-      <div ref="scrollAreaRef" class="space-y-4 flex flex-1 flex-col h-full">
+      <div
+        v-if="groupedMessages.length > 0"
+        ref="scrollAreaRef"
+        class="space-y-4 flex flex-1 flex-col h-full"
+      >
         <div
           v-for="(message, index) in groupedMessages"
           :key="message._id"
@@ -50,6 +54,7 @@
           <div class="text-xs text-muted-foreground mt-1">{{ formatTime(message.createdAt!) }}</div>
         </div>
       </div>
+      <div v-else class="p-3 m-2 rounded-md text-center">There is no any messages yet.</div>
     </ScrollArea>
 
     <CardFooter class="p-4 border-t">
@@ -105,7 +110,6 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
 import dayjs from 'dayjs'
-import { useInfiniteScroll } from '@vueuse/core'
 
 const emojis = ['😀', '😂', '😍', '🤔', '👍', '👎', '🎉', '🔥', '💯', '🙏', '❤️', '😎']
 const { selectedChat, renderNameChat } = useChatContext()!
@@ -169,7 +173,7 @@ const sendMessage = () => {
       userName: profile.value.name,
       text: newMessage.value.trim(),
       createdAt: new Date().toISOString(),
-      chatId: selectedChat.value._id,
+      channelId: selectedChat.value._id,
     }
     socket.value.emit(consts.CHAT_GATEWAY, mess)
     messages.value.result.push(mess)
@@ -178,17 +182,6 @@ const sendMessage = () => {
   }
 }
 
-// const scrollToBottom = () => {
-//   nextTick(() => {
-//     if (el.value) {
-//       el.value.scrollIntoView({
-//         behavior: 'auto',
-//         block: 'end',
-//         inline: 'nearest',
-//       })
-//     }
-//   })
-// }
 const scrollToBottom = () => {
   nextTick(() => {
     if (scrollAreaRef.value) {
@@ -248,6 +241,6 @@ onUnmounted(() => {
 
 <style scoped>
 .scroll-area {
-  height: calc(87vh - 149px);
+  height: calc(91vh - 149px);
 }
 </style>
